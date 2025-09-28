@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        *{
+            
+           
+            font-family: 'poppins', sans-serif;
+        }
+        body{
+            
+            font-size: 24px;
+            background-repeat: no-repeat;
+            background-size: cover;
+            color: white;
+            animation: background-img 15s infinite ease-in-out
+         }
+         header{
+            width: 100%;
+            height: 45px;
+            display: flex;
+            justify-content: center;
+            color: dodgerblue;
+         }
+         nav{
+            height: 45px;
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+
+         }
+        ul{
+            list-style: none;
+            border: 1px white solid;
+            padding: 7px;
+            row-gap: 7px;
+            height: max-content;
+            width: 150px;
+            text-align: center;
+            border-radius: 6px;
+            column-gap: 20px;
+            align-items: center;
+            margin-right: 20px;
+            font-size: 18px;
+            backdrop-filter: blur(2px);
+         }
+         .ul{
+            width: 100%;
+            height: 50px;
+            display: flex;
+            justify-content: flex-end;
+         }
+        ul> li{
+            margin: 7px;
+            border-bottom: 1px solid grey;
+            width: fit-content;
+            cursor: pointer;
+            padding: 7px;
+            transition: 0.4s ease-in-out;
+
+        }
+        ul>li:hover{
+            border: 1px solid white;
+            border-radius: 5px;
+            box-shadow: 0px 0px 7px white;
+            transform: scale(1.09);
+        }
+        a{
+            color: #fff;
+            text-decoration: none;
+        }
+        .menu-icon{
+            border: none;
+            background: transparent;
+            color: white;
+            font-size: 20px;
+            margin :30px;
+            cursor: pointer;
+            height: max-content;
+        }
+        .form{
+            
+            height: 60vh;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            
+        }
+        form{
+            height: 250px;
+            padding: 20px;
+            width: 350px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            row-gap: 20px;
+            align-items: center;
+            border: 1px solid rgb(10, 8, 8);
+            border-radius: 5px;
+            justify-self: center;
+            align-self: center;
+            border: 1px solid white;
+            box-shadow: 0px 0px 10px white;
+            backdrop-filter: blur(2px);
+            background: linear-gradient(to right, #3b82f6, #6366f1, #db2777);
+            background: rgba(255, 255, 255, 0.1);
+        }
+        span{
+            font-size: 28px;
+            font-weight: bold;
+            color: white;
+        }
+        .password{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        input{
+            height: 30px;
+            width: 200px;
+            border-radius: 5px;
+            background-color: transparent;
+            border: none;
+            color: white;
+            border-bottom:1px solid white;
+            outline: none;
+            padding-left: 10px;
+            font-size: 18px;
+            
+        }
+        .morph{
+            height: 100px;
+            width: 100px;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+
+        }
+        input:focus{
+            border-bottom: 2px solid cyan;
+            box-shadow: 0px 0px 10px white;
+
+        }
+        ::placeholder{
+            font-size: 15px;
+            color: rgb(255, 255, 255);
+            opacity: 0.5;
+            row-gap: 5px;
+            
+        }
+        
+        .btn{
+            width: 100px;
+            height: 35px;
+            border-radius: 5px;
+            border: 1px solid white;
+            outline: none;
+            background-image:linear-gradient(45deg,rgb(38, 255, 172),dodgerblue);
+            background-size: 0% 100%;
+            background-position-x: right;
+            background-repeat: no-repeat;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.4s ease-in-out;
+        }
+        .btn:hover{
+            box-shadow: 0px 0px 15px white;
+            background-image: linear-gradient(45deg,rgb(38, 255, 172),dodgerblue);
+            background-size:100% 100% ;
+            background-position-x: left;
+            transform: scale(1.07);
+
+        }
+        .caption{
+            font-size: 12px;
+            color: rgb(184, 183, 183);
+            font-weight: 500;
+        }
+        .register{
+            color: dodgerblue;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        .flex{
+            width: 100%;
+            height: 40px;
+            display: grid;
+            place-content: center;
+        }
+        .line{
+            height: 25px;
+            background-color: dodgerblue;
+            border-radius: 4px;
+            width: 5px;
+            animation: height 1s infinite linear;
+        }
+        .morph :nth-child(odd){
+            animation-delay: 0.2s;
+        }
+        .morph :nth-child(even){
+            animation-delay: 0s;
+        }
+        @keyframes height{
+            0%{
+                height: 10px;
+
+            }
+            50%{
+                height: 30px;
+            }
+            100%{
+                height: 10px;
+            }
+        }
+    
+        
+    </style>
+</head>
+<body background="images/beach.jpg">
+    <h3 style="text-align: center;">Log in into Account</h3>
+    <nav>
+        <button onclick="menu.hidden^=1" class="menu-icon">&#9776</button>
+    </nav>
+    <div class="ul">
+        <ul id="menu" hidden>
+            <a href="index.html" target="_blank"><li>Home</li></a>
+        </ul>
+    </div>
+    <div class="form">
+        <form >
+            <div>
+                <input type="text" placeholder="Enter your username " required >
+            </div>
+            <div>
+                <input type="email" placeholder="Enter email ">
+                
+            </div>
+            <div  class="password">
+                <input type="num"  placeholder="Enter password" required >
+            </div>
+            <div>
+                <span class="caption">Don't have an account?</span>
+                <span class="caption register">Register Now</span>
+            </div>
+            <div>
+                <input type="submit" value="Submit" class="btn">
+            </div>
+        </form>
+        
+    </div>
+
+    <div class="flex">
+        <div class="morph">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+    </div>
+    
+</body>
+</html>

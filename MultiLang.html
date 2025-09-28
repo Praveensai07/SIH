@@ -1,0 +1,25 @@
+<html>
+  <head>
+    <title>Hello World!</title>
+  </head>
+  <body>
+    <div id="google_translate_element"></div>
+    <h1>Hello! This is the index page.</h1>
+    <input type="text" placeholder="Input your name" />
+    <button>This is button</button> <br />
+    <br />
+    <img src="" alt="Empty image" />
+    <script type="text/javascript">
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement(
+          { pageLanguage: "en" },
+          "google_translate_element"
+        );
+      }
+    </script>
+    <script
+      type="text/javascript"
+      src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+    ></script>
+  </body>
+</html>
