@@ -31,7 +31,7 @@
       chatBox.appendChild(userMsg).style.textAlign="right";
 
       // call backend proxy for OpenAI API
-      const res = await fetch("http://localhost:3001/ai", {
+      const res = await fetch("https://sih-aixe.onrender.com/ai", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
