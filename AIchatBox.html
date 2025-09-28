@@ -3,92 +3,91 @@
 <head>
   <meta charset="UTF-8">
   <title>OpenAI Chat Prototype</title>
-   <link rel="stylesheet" href="chat.css">
+  <link rel="stylesheet" href="chat.css">
 </head>
 <body>
-  <div class="Heading">Chat with Prakruthi</div>  <div id="translate"></div>
-  <span><input type="checkbox"  id="theme"></span>
+  <div class="Heading">Chat with Prakruthi</div>
+  <div id="translate"></div>
+  <span><input type="checkbox" id="theme"></span>
   <div class="chat-box"></div>
   <div class="search">
-      <input type = "text" id="msg" placeholder="Enter a Message..."  spellcheck="false" > 
-      <button><img src="images/search.png" alt="search"  onclick="sendMessage()" ></button>
-     
+    <input type="text" id="msg" placeholder="Enter a Message..." spellcheck="false">
+    <button id="sendBtn"><img src="images/search.png" alt="search"></button>
   </div>
+  <button id="btnToSt">Speak</button>
   <script>
-  // API key removed for security. All requests are now proxied through the backend.
-    const voiceMsg = "Not working.";
+    let voiceMsg = "";
     const msgInput = document.getElementById("msg");
     const chatBox = document.querySelector(".chat-box");
+    const sendBtn = document.getElementById("sendBtn");
+
     async function sendMessage() {
-      
-      
-
+      if (!msgInput.value.trim()) return;
       // show user message
-      
       const userMsg = document.createElement("p");
-      userMsg.textContent =" You : "+ msgInput.value;
+      userMsg.textContent = "You : " + msgInput.value;
       userMsg.className = "user";
-      chatBox.appendChild(userMsg).style.textAlign="right";
+      chatBox.appendChild(userMsg).style.textAlign = "right";
 
-      // call backend proxy for OpenAI API
-      const res = await fetch("https://sih-aixe.onrender.com/ai", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          model: "gpt-4o-mini",
-          messages: [{ role: "user", content: msgInput.value }]
-        })
-      });
-
-      const data = await res.json();
-
-      // show AI reply or error
-      if (data.error) {
-        const aiMsg = document.createElement("p");
-        aiMsg.textContent = "Error: " + (data.error.message || data.error);
-        aiMsg.className = "ai";
-        chatBox.appendChild(aiMsg);
-      } else if (data.choices && data.choices[0] && data.choices[0].message) {
-        const aiMsg = document.createElement("p");
-        aiMsg.textContent = "Prakruthi : " + data.choices[0].message.content;
-        aiMsg.className = "ai";
-        chatBox.appendChild(aiMsg);
-      } else {
-        const aiMsg = document.createElement("p");
-        aiMsg.textContent = "No response from AI.";
-        aiMsg.className = "ai";
-        chatBox.appendChild(aiMsg);
-      }
-      msgInput.value = "";
-      chatBox.scrollTop = chatBox.scrollHeight;
-      // voiceMsg = data.choices[0].message.content;
-      // console.log(voiceMsg); 
-    }
-    const bttn = document.getElementById('.btnToSt');
-    // const text = document.getElementById('voiceMsg');
-        bttn.addEventListener('click',()=>{
-          const speech = new SpeechSynthesisUtterance();
-          speech.text = voiceMsg;
-          speech.volume = 1;
-          speech.rate = 1;
-          speech.pitch = 100;
-          window.speechSynthesis.speak(speech);
+      try {
+        const res = await fetch("https://sih-aixe.onrender.com/ai", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            model: "gpt-4o-mini",
+            messages: [{ role: "user", content: msgInput.value }]
+          })
         });
+        const data = await res.json();
 
-        
-      
-  </script>
-  <script src="sih.js" type="text/javascript">
-        function googleTranslateElementInit() {
-        new google.translate.TranslateElement(
-          { pageLanguage: 'en' },
-          'translate'
-        );
+        const aiMsg = document.createElement("p");
+        if (data.error) {
+          aiMsg.textContent = "Error: " + (data.error.message || data.error);
+          voiceMsg = "Error occurred.";
+        } else if (data.choices && data.choices[0] && data.choices[0].message) {
+          aiMsg.textContent = "Prakruthi : " + data.choices[0].message.content;
+          voiceMsg = data.choices[0].message.content;
+        } else {
+          aiMsg.textContent = "No response from AI.";
+          voiceMsg = "No response from AI.";
+        }
+        aiMsg.className = "ai";
+        chatBox.appendChild(aiMsg);
+        msgInput.value = "";
+        chatBox.scrollTop = chatBox.scrollHeight;
+      } catch (err) {
+        const aiMsg = document.createElement("p");
+        aiMsg.textContent = "Network error.";
+        aiMsg.className = "ai";
+        chatBox.appendChild(aiMsg);
+        voiceMsg = "Network error.";
       }
-    </script>
-    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
-    </script>
+    }
+
+    sendBtn.addEventListener('click', sendMessage);
+    msgInput.addEventListener('keydown', function(e) {
+      if (e.key === "Enter") sendMessage();
+    });
+
+    const bttn = document.getElementById('btnToSt');
+    bttn.addEventListener('click', () => {
+      if (!voiceMsg) return;
+      const speech = new SpeechSynthesisUtterance();
+      speech.text = voiceMsg;
+      speech.volume = 1;
+      speech.rate = 1;
+      speech.pitch = 1;
+      window.speechSynthesis.speak(speech);
+    });
+  </script>
+  <script>
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement(
+        { pageLanguage: 'en' },
+        'translate'
+      );
+    }
+  </script>
+  <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
