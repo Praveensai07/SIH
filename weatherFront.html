@@ -47,7 +47,7 @@
 
     async function checkWeather(city) {
         try {
-            const response = await fetch(`${ApiUrl}?city=${encodeURIComponent(city)}`);
+            const response = await fetch(`${ApiUrl}/weather?city=${encodeURIComponent(city)}`);
             if (response.status === 404) {
                 document.querySelector(".error").style.display = "block";
                 document.querySelector(".weather").style.display = "none";
