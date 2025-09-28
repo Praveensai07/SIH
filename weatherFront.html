@@ -40,12 +40,11 @@
 </body>
 
 <script>
-    
     const ApiUrl = "https://sih-aixe.onrender.com";
     const form = document.getElementById('search');
     const searchBox = document.getElementById('myInput');
-    const searchBtn = document.getElementById('Submitbtn');
     const WeatherIcon = document.querySelector(".weather-icon");
+
     async function checkWeather(city) {
         try {
             const response = await fetch(`${ApiUrl}?city=${encodeURIComponent(city)}`);
@@ -54,7 +53,6 @@
                 document.querySelector(".weather").style.display = "none";
             } else {
                 const data = await response.json();
-                console.log(data);
                 if (data.weather && data.weather[0]) {
                     if (data.weather[0].main === 'Clouds') {
                         WeatherIcon.src = "images/clouds.png";
@@ -80,22 +78,10 @@
             document.querySelector(".weather").style.display = "none";
         }
     }
-    searchBox.addEventListener("keydown",
-    function(event){
-        if(event.key==="Enter"){
-            event.preventDefault();
-            checkWeather(searchBox.value)
-            
-        }
-    })
 
-    searchBtn.addEventListener("click",
-            function(event)=>{
-                event.preventDefault();
-                checkWeather(searchBox.value);
-    })
-
-
+    form.addEventListener("submit", function(event) {
+        event.preventDefault();
+        checkWeather(searchBox.value);
+    });
 </script>
-
 </html>
