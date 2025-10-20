@@ -190,7 +190,7 @@ a{
     content:"";
             height: 100%;
             width: 100%;
-            background: conic-gradient(from var(--angle) , red,gold,lime,orange,cyan,blue);
+            background: conic-gradient(from var(--angle) , orange,transparent);
             position: absolute;
             z-index: -1;
             border-radius: inherit;
