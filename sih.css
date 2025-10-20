@@ -163,9 +163,22 @@ a{
     color: rgb(214, 214, 214);
     cursor: pointer;
 }
+.list-link.after{
+    content;"";
+    position:absolute;
+    bottom:0;
+    left:0;
+    height:2px;
+    width:100%;
+    border-radius:2px;
+    transform:scaleX(0);
+    transition:transform 0.3s ease-in;
+    
+}
 .list-link:hover{
     color: orange;
-    transition: 0.4s ease-in;
+    transform:scaleX(1)
+    transition: 0.3s ease-in;
 }
 .sec1-btn{
     padding: 7px;
