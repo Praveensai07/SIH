@@ -164,7 +164,7 @@ a{
     cursor: pointer;
 }
 .list-link.after{
-    content;"";
+    content:"";
     position:absolute;
     bottom:0;
     left:0;
@@ -197,21 +197,6 @@ a{
     width: 150px;
     padding: 10px;
    
-}
-.sec1-btn:before,
-.sec1-btn:after{
-    content:"";
-            height: 100%;
-            width: 100%;
-            background: conic-gradient(from var(--angle) , orange,transparent);
-            position: absolute;
-            z-index: -1;
-            border-radius: inherit;
-            border:3px ;
-            animation: animate 2s infinite linear;
-}
-.sec1-btn{
-    filter(blur(7px));
 }
 .sec1-btn:hover{
     background-color: orange;
