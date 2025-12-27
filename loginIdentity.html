@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Identity</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <style>
+        *{
+            box-sizing: border-box;
+            font-family: "poppins", sans-serif;
+        }
+        body{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-position: right top;
+            background-size: cover;
+            background-attachment: fixed;
+            background-blend-mode: lighten;
+        }
+        .tourist{
+            width: 100%;
+            height: 100% ;
+            background-size: cover;
+            background-position: bottom;
+            margin-bottom: 0px;
+            
+            transition: all 0.3s ease;
+            transform: translateY(-20px);
+        }
+        .guide{
+            width: 100%;
+            height: 100% ;
+            background-size: cover;
+            background-position: bottom;
+            margin-bottom: 0px;
+            
+            transition: all 0.3s ease;
+            transform: translateY(-20px);
+        }
+        .center{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-top: 50px;
+        }
+        .box{
+            width: 200px;
+            height: 180px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            color: black;
+            margin: 20px;   
+            padding: 20px 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.334);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            overflow: hidden;
+        }
+        img{
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            position: relative;
+            bottom: -60px;
+            transform: scale(0.9);
+            transition: all 0.3s ease;
+        }
+        .box:hover{
+            color: white;
+            transform: scale(1.05);
+            background-color: rgb(61, 238, 117);
+        }
+        .box:hover > span{
+            bottom: 0px;
+        }
+        .box:hover  > img{
+            transform: scale(1.1);
+            transform: translateY(-60px);
+        }
+        a{
+            text-decoration: none;
+        }
+        h2{
+            text-align: center;
+            width: 100%;
+        }
+        span{
+            
+            font-weight: 600;
+            position: relative;
+            bottom: -80px;
+            transition: all 0.4s ease;
+        }
+        .img-guide{
+            scale: 1.1;
+        }
+
+    </style>
+</head>
+<body background="images/identitybg.png">
+    <h2>Are you a Tourist or a Tourist Guide?</h2>
+    <div class="center">
+        <a href="./login.html">
+            <div class="box tourist">
+            <span>Tourist</span>
+            <img src="images\tourist3.png" caption="hii" alt="Tourist">
+        </div>
+        </a>
+        
+        <a href="./guidelogin.html">
+            <div class="box guide">
+            <span>Tourist Guide</span>
+            <img src="images\guide.png" class="img-guide" alt="Tourist Guide">
+        </div>
+        </a>
+    </div>
+</body>
+</html>

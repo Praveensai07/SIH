@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Tourism Donation Hub</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to right, #e8f5e9, #e0f7fa);
+}
+header {
+    background: #00695c;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+section {
+    max-width: 1200px;
+    margin: auto;
+    padding: 40px 20px;
+}
+h2 {
+    text-align: center;
+    color: #004d40;
+    margin-bottom: 30px;
+}
+
+/* Donation Cards */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+}
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 8px 18px rgba(0,0,0,0.1);
+}
+.card h3 {
+    color: #00796b;
+}
+.card p {
+    font-size: 14px;
+    line-height: 1.6;
+}
+.card button {
+    margin-top: 15px;
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #00796b;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Dashboard */
+.dashboard {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+.dash-box {
+    background: white;
+    padding: 30px;
+    width: 280px;
+    text-align: center;
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+}
+.dash-box span {
+    font-size: 34px;
+    color: #00695c;
+    font-weight: bold;
+}
+
+/* Image Loop */
+.glance-container {
+    overflow: hidden;
+    margin-top: 50px;
+}
+.glance-track {
+    display: flex;
+    width: 200%;
+    animation: scroll 30s linear infinite;
+}
+.glance-track img {
+    width: 300px;
+    height: 200px;
+    margin-right: 20px;
+    border-radius: 15px;
+    object-fit: cover;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+@keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* Modals */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    justify-content: center;
+    align-items: center;
+}
+.modal-content {
+    background: white;
+    width: 90%;
+    max-width: 450px;
+    padding: 25px;
+    border-radius: 15px;
+}
+
+.options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-top: 10px;
+}
+.option {
+    padding: 14px;
+    text-align: center;
+    border-radius: 10px;
+    background: #f1f8e9;
+    cursor: pointer;
+}
+.option:hover {
+    border: 2px solid #00796b;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+}
+
+.pay-btn {
+    margin-top: 15px;
+    width: 100%;
+    padding: 12px;
+    background: #00796b;
+    color: white;
+    border: none;
+    border-radius: 8px;
+}
+.close-btn {
+    background: #ccc;
+    color: black;
+}
+
+footer {
+    background: #004d40;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    margin-top: 40px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Tourism Donation Hub</h1>
+<p>Supporting Tribal Communities & Developing Tourism</p>
+</header>
+
+<section>
+
+<h2>Choose Donation Category</h2>
+<div class="cards">
+    <div class="card">
+        <h3>Tribal Community Support</h3>
+        <p>Education, healthcare, food support and welfare for tribal families.</p>
+        <button onclick="openPayment()">Donate Now</button>
+    </div>
+    <div class="card">
+        <h3>Tourist Place Development</h3>
+        <p>Road construction, cleanliness, drinking water and facilities.</p>
+        <button onclick="openPayment()">Donate Now</button>
+    </div>
+    <div class="card">
+        <h3>Combined Support</h3>
+        <p>Balanced support for both community welfare and tourism development.</p>
+        <button onclick="openPayment()">Donate Now</button>
+    </div>
+</div>
+
+<h2>Donation Dashboard</h2>
+<div class="dashboard">
+    <div class="dash-box">
+        <h3>Total Donors</h3>
+        <span>1,245</span>
+    </div>
+</div>
+
+<h2>How Donations Are Used</h2>
+<div class="glance-container">
+    <div class="glance-track">
+        <img src="images\HUB4.jpeg">
+        <img src="images\HUB5.jpeg">
+        <img src="images\HUB3.jpeg">
+        <img src="images\HUB2.jpeg">
+        <img src="images\HUB6.jpeg">
+        <img src="images\HUB1.jpeg">
+        <img src="images\HUB7.jpeg">
+        <img src="images\HUB8.jpeg">
+    </div>
+</div>
+
+</section>
+
+<!-- PAYMENT METHOD MODAL -->
+<div class="modal" id="paymentModal">
+<div class="modal-content">
+<h3>Select Payment Method</h3>
+
+<p><b>UPI Apps</b></p>
+<div class="options">
+    <div class="option" onclick="openUPI()">PhonePe</div>
+    <div class="option" onclick="openUPI()">Google Pay</div>
+    <div class="option" onclick="openUPI()">Paytm</div>
+    <div class="option" onclick="openUPI()">Navi Pay</div>
+</div>
+
+<p><b>Banks</b></p>
+<div class="options">
+    <div class="option" onclick="openBank()">SBI</div>
+    <div class="option" onclick="openBank()">HDFC</div>
+    <div class="option" onclick="openBank()">ICICI</div>
+    <div class="option" onclick="openBank()">Axis Bank</div>
+</div>
+
+<button class="pay-btn close-btn" onclick="closeAll()">Cancel</button>
+</div>
+</div>
+
+<!-- UPI PAYMENT PAGE -->
+<div class="modal" id="upiModal">
+<div class="modal-content">
+<h3>UPI Payment</h3>
+
+<input type="number" placeholder="Enter Amount ₹">
+<button class="pay-btn">Proceed to Pay</button>
+<button class="pay-btn close-btn" onclick="closeAll()">Cancel</button>
+</div>
+</div>
+
+<!-- BANK PAYMENT PAGE -->
+<div class="modal" id="bankModal">
+<div class="modal-content">
+<h3>Bank Transfer</h3>
+
+<input type="text" placeholder="Account Number">
+<input type="text" placeholder="IFSC Code">
+<input type="number" placeholder="Enter Amount ₹">
+
+<button class="pay-btn">Proceed to Pay</button>
+<button class="pay-btn close-btn" onclick="closeAll()">Cancel</button>
+</div>
+</div>
+
+<footer>
+© 2025 Tourism Donation Hub | Frontend Demo
+</footer>
+
+<script>
+function openPayment() {
+    document.getElementById("paymentModal").style.display = "flex";
+}
+
+function openUPI() {
+    document.getElementById("paymentModal").style.display = "none";
+    document.getElementById("upiModal").style.display = "flex";
+}
+
+function openBank() {
+    document.getElementById("paymentModal").style.display = "none";
+    document.getElementById("bankModal").style.display = "flex";
+}
+
+function closeAll() {
+    document.getElementById("paymentModal").style.display = "none";
+    document.getElementById("upiModal").style.display = "none";
+    document.getElementById("bankModal").style.display = "none";
+}
+</script>
+
+</body>
+</html>

@@ -1,266 +1,265 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <style>
-        body{
-            font-family: 'poppins', sans-serif;
-            font-size: 24px;
-            background-repeat: no-repeat;
-            background-size: cover;
-            color: white;
-            animation: background-img 15s infinite ease-in-out
-         }
-         header{
-            width: 100%;
-            height: 45px;
-            display: flex;
-            justify-content: center;
-            color: dodgerblue;
-         }
-         nav{
-            height: 45px;
-            width: 100%;
-            display: flex;
-            justify-content: flex-end;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register</title>
 
-         }
-        ul{
-            list-style: none;
-            border: 1px white solid;
-            padding: 7px;
-            row-gap: 7px;
-            height: max-content;
-            width: 150px;
-            text-align: center;
-            border-radius: 6px;
-            column-gap: 20px;
-            align-items: center;
-            margin-right: 20px;
-            font-size: 18px;
-            backdrop-filter: blur(2px);
-         }
-         .ul{
-            width: 100%;
-            height: 50px;
-            display: flex;
-            justify-content: flex-end;
-         }
-        ul> li{
-            margin: 7px;
-            border-bottom: 1px solid grey;
-            width: fit-content;
-            cursor: pointer;
-            padding: 7px;
-            transition: 0.4s ease-in-out;
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
 
-        }
-        ul>li:hover{
-            border: 1px solid white;
-            border-radius: 5px;
-            box-shadow: 0px 0px 7px white;
-            transform: scale(1.09);
-        }
-        a{
-            color: #fff;
-            text-decoration: none;
-        }
-        .menu-icon{
-            border: none;
-            background: transparent;
-            color: white;
-            font-size: 20px;
-            margin :30px;
-            cursor: pointer;
-            height: max-content;
-        }
-        .form{
-            
-            height: 60vh;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            
-        }
-        form{
-            height: 250px;
-            padding: 20px;
-            width: 350px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            row-gap: 20px;
-            align-items: center;
-            border: 1px solid rgb(10, 8, 8);
-            border-radius: 5px;
-            justify-self: center;
-            align-self: center;
-            border: 1px solid white;
-            box-shadow: 0px 0px 10px white;
-            backdrop-filter: blur(2px);
-            background: linear-gradient(to right, #3b82f6, #6366f1, #db2777);
-            background: rgba(255, 255, 255, 0.1);
-        }
-        span{
-            font-size: 28px;
-            font-weight: bold;
-            color: white;
-        }
-        .password{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        input{
-            height: 30px;
-            width: 200px;
-            border-radius: 5px;
-            background-color: transparent;
-            border: none;
-            color: white;
-            border-bottom:1px solid white;
-            outline: none;
-            padding-left: 10px;
-            font-size: 18px;
-            
-        }
-        .morph{
-            height: 100px;
-            width: 100px;
-            display: flex;
-            justify-content: space-evenly;
-            align-items: center;
+<style>
+*{
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
 
-        }
-        input:focus{
-            border-bottom: 2px solid rgb(255, 153, 0);
-            box-shadow: 0px 0px 10px white;
+body{
+    font-size: 24px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    color: white;
+}
 
-        }
-        ::placeholder{
-            font-family: 'poppins', sans-serif;
-            font-size: 15px;
-            font-weight: 500;
-            color: rgba(139, 133, 133, 0.822);
-            opacity: 0.9;
-            row-gap: 5px;
-        
-        }
-        
-        .btn{
-            width: 100px;
-            height: 35px;
-            border-radius: 5px;
-            border: 1px solid white;
-            outline: none;
-            background-image: linear-gradient(45deg,rgb(235, 86, 49),rgb(255, 166, 0));
-            background-size: 0% 100%;
-            background-position-x: right;
-            background-repeat: no-repeat;
-            color: white;
-            font-size: 18px;
-            cursor: pointer;
-            transition: 0.4s ease-in-out;
-        }
-        .btn:hover{
-            box-shadow: 0px 0px 15px white;
-            background-image: linear-gradient(45deg,rgb(235, 86, 49),rgb(255, 166, 0));
-            background-size:100% 100% ;
-            background-position-x: left;
-            transform: scale(1.07);
+/* NAV */
+nav{
+    height: 45px;
+    display: flex;
+    justify-content: flex-end;
+}
 
-        }
-        .caption{
-            font-size: 12px;
-            color: rgb(184, 183, 183);
-            font-weight: 500;
-        }
-        .register{
-            color: dodgerblue;
-            cursor: pointer;
-            font-weight: 600;
-        }
-        .flex{
-            width: 100%;
-            height: 40px;
-            display: grid;
-            place-content: center;
-        }
-        .line{
-            height: 25px;
-            background-color: rgb(233, 54, 0);
-            border-radius: 4px;
-            width: 5px;
-            animation: height 1s infinite linear;
-        }
-        .morph :nth-child(odd){
-            animation-delay: 0.2s;
-        }
-        .morph :nth-child(even){
-            animation-delay: 0s;
-        }
-        @keyframes height{
-            0%{
-                height: 10px;
+.menu-icon{
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 20px;
+    margin: 20px;
+    cursor: pointer;
+}
 
-            }
-            50%{
-                height: 30px;
-            }
-            100%{
-                height: 10px;
-            }
-        }
-    
-        
-    </style>
+.ul{
+    display: flex;
+    justify-content: flex-end;
+}
+
+ul{
+    list-style: none;
+    padding: 7px;
+    width: 150px;
+    margin-right: 20px;
+    border-radius: 6px;
+    font-size: 18px;
+    background: rgba(255,255,255,0.25);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.4);
+}
+
+ul li{
+    padding: 7px;
+    text-align: center;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(255,255,255,0.4);
+}
+
+a{
+    color: white;
+    text-decoration: none;
+}
+
+/* FORM WRAPPER */
+.form{
+    min-height: calc(100vh - 45px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* GLASS FORM */
+form{
+    width: 100%;
+    max-width: 340px;
+    padding: 25px;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.164);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.877);
+    box-shadow: 0 0 5px rgb(235, 235, 235);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h3{
+    color: rgb(250, 250, 250);
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+/* FLOATING INPUTS */
+.input-box{
+    position: relative;
+    width: 100%;
+    margin-top: 22px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.74);
+}
+
+.input-box input{
+    width: 100%;
+    height: 45px;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 15px;
+    color: rgb(255, 255, 255);
+    padding: 0 5px;
+}
+
+.input-box label{
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    font-size: 1rem;
+    color: #e9e9e9;
+    pointer-events: none;
+    transition: 0.4s ease;
+}
+.input-box i{
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #ca9145;
+    transition: 0.2s ease;
+}
+.input-box i:hover{
+    color: rgb(255, 136, 0);
+}
+
+.input-box input:focus ~ label,
+.input-box input:not(:placeholder-shown) ~ label{
+    top: -6px;
+    font-size: 0.85rem;
+    color: rgb(255, 255, 255);
+}
+
+/* ERRORS */
+.error{
+    font-size: 12px;
+    color: red;
+    align-self: flex-start;
+    margin-top: 4px;
+}
+
+/* BUTTON */
+.btn{
+    width: 120px;
+    height: 38px;
+    margin-top: 15px;
+    border-radius: 25px;
+    border: none;
+    background-image: linear-gradient(45deg, rgb(235, 86, 49), rgb(255, 166, 0));
+    background-size: 0% 100%;
+    background-repeat: no-repeat;
+    background-position: right;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-size 0.4s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn:hover{
+    background-size: 100% 100%;
+    background-position: left;
+    transform: scale(1.07);
+    box-shadow: 0 0 5px #ff004c, 0 0 7px #ff8c00;
+    color: white;
+}
+
+/* TEXT */
+.caption{
+    font-size: 12px;
+    color: rgb(255, 255, 255);
+    margin-top: 10px;
+}
+
+.register{
+    color: dodgerblue;
+    font-weight: 600;
+}
+
+/* RESPONSIVE */
+@media(max-width:480px){
+    body{ font-size: 18px; }
+    form{ max-width: 95%; }
+}
+</style>
 </head>
-<body background="images/jharkhand1.jpg" >
-    <h3 style="text-align: center;">Register </h3>
-    <nav>
-        <button onclick="menu.hidden^=1" class="menu-icon">&#9776</button>
-    </nav>
-    <div class="ul">
-        <ul id="menu" hidden>
-            <a href="index.html" target="_blank"><li>Home</li></a>
-        </ul>
+
+<body background="images/jharkhand1.jpg">
+
+<nav>
+    <button onclick="menu.hidden^=1" class="menu-icon">&#9776;</button>
+</nav>
+
+<div class="ul">
+    <ul id="menu" hidden>
+        <a href="index.html"><li>Home</li></a>
+    </ul>
+</div>
+
+<div class="form">
+<form id="registerForm" action="/register" method="post">
+
+    <h3>Register</h3>
+
+    <div class="input-box">
+        <input type="text" id="mobile" maxlength="10" placeholder=" " required  name="mobile">
+        <label>Mobile Number</label>
     </div>
-    <div class="form">
-        <form >
-            <div>
-                <input type="text" placeholder="Enter your Name " required >
-            </div>
-            <div class="password">
-                <input type="num"  placeholder="Enter mobile num" required >
-            </div>
-            <div>
-                <input type="email" placeholder="Enter Email ">
-            </div>
-            <div>
-                <span class="caption">Already have an account?</span>
-                <a href="login.html"><span class="caption register">Login</span></a>
-            </div>
-            <div>
-                <input type="submit" value="Submit" class="btn">
-            </div>
-        </form>
-        
+    <div class="error" id="mobileError"></div>
+
+    <div class="input-box">
+        <input type="text" id="userid" maxlength="20" placeholder=" " required name="userid">
+        <label>User ID</label>
+    </div>
+    <div class="error" id="userError"></div>
+
+    <div class="input-box">
+        <input type="password" id="pwd" maxlength="16" placeholder=" " required name="password">
+        <label>Password</label>
+        <i id="eyeIcon" class="fa-solid fa-eye"></i>
+        <!-- <div id="passwordError" class="error"></div> -->
+    </div>
+   <div id="passwordError" class="error"></div>
+
+    <div class="caption">
+        Already have an account?
+        <a href="login.html"><span class="register">Login</span></a>
     </div>
 
-    <div class="flex">
-        <div class="morph">
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
-        </div>
-    </div>
-    
+    <input type="submit" value="Submit" class="btn">
+
+</form>
+</div>
+
+<!-- JS UNCHANGED -->
+<script src="password.js"></script>
+<script>
+const eyeIcon =document.getElementById("eyeIcon");
+const pwd = document.getElementById("pwd");
+eyeIcon.addEventListener("click",()=>{
+    if(pwd.type==="password"){
+        pwd.type="text";
+        eyeIcon.classList.replace("fa-eye","fa-eye-slash");
+    } else {
+        pwd.type="password";
+        eyeIcon.classList.replace("fa-eye-slash","fa-eye");
+    }
+})
+</script>
+
 </body>
 </html>

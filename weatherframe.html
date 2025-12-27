@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Tourist Weather Widget</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: "Poppins", Arial, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: transparent; /* iframe-safe */
+      color: #fff;
+    }
+
+    .widget {
+      width: 100%;
+      max-width: 420px;
+      margin: auto;
+      padding: 20px;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      border-radius: 18px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .header h2 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .badge {
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .main {
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    .temp {
+      font-size: 48px;
+      font-weight: 600;
+    }
+
+    .condition {
+      font-size: 16px;
+      color: #4dd0ff;
+      margin-top: 6px;
+    }
+
+    .description {
+      font-size: 13px;
+      opacity: 0.8;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 12px;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .card span {
+      display: block;
+      font-size: 12px;
+      opacity: 0.7;
+    }
+
+    .card strong {
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    .updated {
+      text-align: center;
+      font-size: 11px;
+      opacity: 0.6;
+      margin-top: 14px;
+    }
+
+    .error {
+      text-align: center;
+      color: #ff8a8a;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="widget">
+    <div class="header">
+      <h2 id="city">Loading…</h2>
+      <span class="badge">LIVE</span>
+    </div>
+
+    <div class="main">
+      <div class="temp" id="temp">--°</div>
+      <div class="condition" id="condition">---</div>
+      <div class="description" id="description"></div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <span>Humidity</span>
+        <strong id="humidity">--%</strong>
+      </div>
+      <div class="card">
+        <span>Wind</span>
+        <strong id="wind">-- m/s</strong>
+      </div>
+      <div class="card">
+        <span>Rain</span>
+        <strong id="rain">-- mm</strong>
+      </div>
+      <div class="card">
+        <span>Status</span>
+        <strong>Safe</strong>
+      </div>
+    </div>
+
+    <div class="updated" id="updated"></div>
+    <div class="error" id="error"></div>
+  </div>
+
+  <script>
+    async function updateWeather() {
+      try {
+        const res = await fetch("/api/weather");
+        const data = await res.json();
+
+        if (data.error) {
+          document.getElementById("error").innerText =
+            "Unable to load weather data";
+          return;
+        }
+
+        document.getElementById("city").innerText = data.city;
+        document.getElementById("temp").innerText =
+          Math.round(data.temp) + "°C";
+        document.getElementById("condition").innerText = data.condition;
+        document.getElementById("description").innerText = data.description;
+        document.getElementById("humidity").innerText =
+          data.humidity + "%";
+        document.getElementById("wind").innerText =
+          data.windSpeed + " m/s";
+        document.getElementById("rain").innerText =
+          data.rain + " mm";
+        document.getElementById("updated").innerText =
+          "Updated at " + new Date().toLocaleTimeString();
+      } catch (e) {
+        document.getElementById("error").innerText =
+          "Server connection error";
+      }
+    }
+
+    updateWeather();
+    setInterval(updateWeather, 5000);
+  </script>
+</body>
+</html>

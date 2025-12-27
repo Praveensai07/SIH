@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Jharkhand Security Alerts</title>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+  <link rel="stylesheet" href="alerts.css">
+</head>
+<body>
+
+<header>
+  <h1>🚨 Jharkhand Tourist Security Alert System</h1>
+  <p>Live danger alerts • SOS • Offline safety</p>
+</header>
+
+<div id="legend">
+  <h3>⚠️ Danger Zones</h3>
+  <label>
+    <input type="checkbox" checked onchange="toggleZones('Wildlife')">
+    Wildlife
+  </label><br>
+  <label>
+    <input type="checkbox" checked onchange="toggleZones('Mining')">
+    Mining
+  </label>
+</div>
+
+<div id="map"></div>
+
+<div id="alertBox" class="hidden"></div>
+<button id="locateBtn">📍 My Location</button>
+<button id="sosBtn">🆘 SOS</button>
+<button id="arBtn">📱 AR Direction</button>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="alerts.js"></script>
+</body>
+</html>

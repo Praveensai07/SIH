@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+*{
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body{
+    font-size: 24px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    color: white;
+}
+/* NAV */
+nav{
+    height: 45px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.menu-icon{
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 20px;
+    margin: 20px;
+    cursor: pointer;
+}
+
+.ul{
+    display: flex;
+    justify-content: flex-end;
+}
+
+ul{
+    list-style: none;
+    padding: 7px;
+    width: 150px;
+    margin-right: 20px;
+    border-radius: 6px;
+    font-size: 18px;
+    background: rgba(255,255,255,0.25);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.4);
+}
+
+ul li{
+    padding: 7px;
+    text-align: center;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(255,255,255,0.4);
+}
+
+a{
+    color: white;
+    text-decoration: none;
+}
+
+/* FORM WRAPPER */
+.form{
+    min-height: calc(100vh - 45px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* GLASS FORM */
+form{
+    width: 100%;
+    max-width: 340px;
+    padding: 25px;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.164);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.877);
+    box-shadow: 0 0 5px rgb(235, 235, 235);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h3{
+    color: rgb(250, 250, 250);
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+/* FLOATING INPUTS */
+.input-box{
+    position: relative;
+    width: 100%;
+    margin-top: 22px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.74);
+}
+
+.input-box input{
+    width: 100%;
+    height: 45px;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 15px;
+    color: rgb(255, 255, 255);
+    padding: 0 5px;
+}
+
+.input-box label{
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    font-size: 1rem;
+    color: #e9e9e9;
+    pointer-events: none;
+    transition: 0.4s ease;
+}
+.input-box i{
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #ad6856;
+    transition: all 0.3s ease;
+}
+.input-box i:hover{
+    color: orangered;
+}
+.input-box input:focus ~ label,
+.input-box input:not(:placeholder-shown) ~ label{
+    top: -6px;
+    font-size: 0.85rem;
+    color: orangered;
+}
+
+/* ERRORS */
+.error{
+    font-size: 12px;
+    color: red;
+    align-self: flex-start;
+    margin-top: 4px;
+}
+
+/* BUTTON */
+.btn{
+    width: 120px;
+    height: 38px;
+    margin-top: 15px;
+    border-radius: 25px;
+    border: none;
+    background-image: linear-gradient(45deg, rgb(235, 86, 49), rgb(255, 166, 0));
+    background-size: 0% 100%;
+    background-repeat: no-repeat;
+    background-position: right;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-size 0.4s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn:hover{
+    background-size: 100% 100%;
+    background-position: left;
+    transform: scale(1.07);
+    box-shadow: 0 0 5px #ff004c, 0 0 7px #ff8c00;
+    color: white;
+}
+
+/* TEXT */
+.caption{
+    font-size: 12px;
+    color: rgb(255, 255, 255);
+    margin-top: 10px;
+}
+
+.register{
+    color: dodgerblue;
+    font-weight: 600;
+}
+
+/* RESPONSIVE */
+@media(max-width:480px){
+    body{ font-size: 18px; }
+    form{ max-width: 95%; }
+}
+</style>
+</head>
+
+<body background="images/jharkhand1.jpg">
+
+<nav>
+    <button onclick="menu.hidden^=1" class="menu-icon">&#9776;</button>
+</nav>
+
+<div class="ul">
+    <ul id="menu" hidden>
+        <a href="index.html"><li>Home</li></a>
+    </ul>
+</div>
+
+<div class="form">
+<form id="registerForm" action="/guide-register" method="POST">
+
+    <h3>Register</h3>
+
+    <div class="input-box">
+        <input type="tel" id="mobile" maxlength="10" placeholder=" " required name="mobile">
+        <label>Mobile Number</label>
+    </div>
+    <div class="error" id="mobileError"></div>
+
+    <div class="input-box">
+        <input type="text" id="userid" maxlength="20" placeholder=" " required name="userid">
+        <label>Guide ID</label>
+    </div>
+    <div class="error" id="userError"></div>
+
+    <div class="input-box">
+        <input type="password" id="pwd" maxlength="16" required placeholder=" " name="password" >
+        <i id="eyeIcon" class="fa-solid fa-eye"></i>
+        <label>Password</label>
+    </div>
+    <div class="error" id="passError"></div>
+    <p class="error" id="registerError"></p>
+
+    <div class="caption">
+        Already have an account?
+        <a href="login.html"><span class="register">Login</span></a>
+    </div>
+
+    <input type="submit" value="Submit" class="btn">
+
+</form>
+</div>
+
+
+
+<script>
+/* ===== URL PARAMS (ONLY ONCE) ===== */
+const params = new URLSearchParams(window.location.search);
+
+/* USER EXISTS ERROR */
+if (params.get("error") === "exists") {
+    document.getElementById("registerError").textContent =
+        "User already exists";
+}
+
+/* INVALID PASSWORD ERROR FROM SERVER */
+if (params.get("error") === "invalid_password") {
+    document.getElementById("passError").textContent =
+        "Password must be at least 6 characters and contain letters";
+}
+
+/* ===== SHOW / HIDE PASSWORD ===== */
+const eyeIcon = document.getElementById("eyeIcon");
+const pwdInput = document.getElementById("pwd");
+
+eyeIcon.addEventListener("click", () => {
+    if (pwdInput.type === "password") {
+        pwdInput.type = "text";
+        eyeIcon.classList.replace("fa-eye", "fa-eye-slash");
+    } else {
+        pwdInput.type = "password";
+        eyeIcon.classList.replace("fa-eye-slash", "fa-eye");
+    }
+});
+
+/* ===== CLIENT SIDE PASSWORD VALIDATION ===== */
+document.getElementById("registerForm").addEventListener("submit", function (e) {
+    const pwd = pwdInput.value.trim();
+    const passError = document.getElementById("passError");
+
+    passError.textContent = "";
+
+    if (pwd.length < 6) {
+        e.preventDefault();
+        passError.textContent = "Password must be at least 6 characters";
+        return;
+    }
+
+    if (!/[a-zA-Z]/.test(pwd)) {
+        e.preventDefault();
+        passError.textContent =
+            "Password cannot contain only numbers";
+        return;
+    }
+});
+</script>
+
+
+</body>
+</html>

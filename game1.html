@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Catch the Dust Game</title>
+
+<style>
+body {
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to bottom, #c2f0f7, #f0f7c2);
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    color: #00796b;
+    margin-top: 20px;
+    text-shadow: 2px 2px #ffffff;
+}
+
+canvas {
+    border: 3px solid #00796b;
+    background-color: #ffffff;
+    display: block;
+    margin: 20px auto;
+    box-shadow: 3px 3px 15px #888888;
+}
+
+#controls {
+    margin: 10px;
+}
+
+select {
+    font-size: 16px;
+    padding: 5px;
+    margin: 0 10px;
+    border-radius: 5px;
+}
+
+#score {
+    font-size: 24px;
+    color: #d84315;
+    margin: 10px;
+    font-weight: bold;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #00796b;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #004d40;
+    transform: scale(1.1);
+}
+</style>
+</head>
+
+<body>
+
+<h1>Catch the Dust Game</h1>
+
+<div id="controls">
+    <label>Level:</label>
+    <select id="levelSelect">
+        <option value="1">Easy</option>
+        <option value="2" selected>Medium</option>
+        <option value="3">Hard</option>
+    </select>
+
+    <label>Speed:</label>
+    <select id="speedSelect">
+        <option value="3">Slow</option>
+        <option value="5" selected>Normal</option>
+        <option value="8">Fast</option>
+    </select>
+
+    <button id="startBtn" disabled>Start Game</button>
+</div>
+
+<canvas id="gameCanvas" width="800" height="600"></canvas>
+<p id="score">Score: 0</p>
+
+<script>
+// -------- IMAGE PATHS --------
+const binSrc = "images/bin.png";
+const dustSrc = "images/paper.png";
+
+// -------- CANVAS --------
+const canvas = document.getElementById("gameCanvas");
+const ctx = canvas.getContext("2d");
+
+// -------- LOAD IMAGES --------
+const binImg = new Image();
+const dustImg = new Image();
+binImg.src = binSrc;
+dustImg.src = dustSrc;
+
+let imagesLoaded = 0;
+[binImg, dustImg].forEach(img => {
+    img.onload = () => {
+        imagesLoaded++;
+        if (imagesLoaded === 2) {
+            document.getElementById("startBtn").disabled = false;
+        }
+    };
+});
+
+// -------- GAME VARIABLES --------
+const binWidth = 100;
+const binHeight = 100;
+const binY = canvas.height - binHeight - 10;
+
+let binX;
+let dusts = [];
+let score = 0;
+let gameSpeed = 5;
+let level = 1;
+let gameRunning = false;
+let dustInterval = null;
+
+const dustSize = 40;
+const keys = { left: false, right: false };
+
+// -------- KEYBOARD CONTROLS --------
+document.addEventListener("keydown", e => {
+    if (e.key === "ArrowLeft") keys.left = true;
+    if (e.key === "ArrowRight") keys.right = true;
+});
+
+document.addEventListener("keyup", e => {
+    if (e.key === "ArrowLeft") keys.left = false;
+    if (e.key === "ArrowRight") keys.right = false;
+});
+
+// -------- CREATE DUST --------
+function createDust() {
+    dusts.push({
+        x: Math.random() * (canvas.width - dustSize),
+        y: -dustSize
+    });
+}
+
+// -------- GAME LOOP --------
+function gameLoop() {
+    if (!gameRunning) return;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Move bin
+    const binSpeed = gameSpeed + 3;
+    if (keys.left && binX > 0) binX -= binSpeed;
+    if (keys.right && binX < canvas.width - binWidth) binX += binSpeed;
+
+    ctx.drawImage(binImg, binX, binY, binWidth, binHeight);
+
+    // Update dusts (SAFE LOOP)
+    for (let i = dusts.length - 1; i >= 0; i--) {
+        const dust = dusts[i];
+        dust.y += gameSpeed;
+
+        ctx.drawImage(dustImg, dust.x, dust.y, dustSize, dustSize);
+
+        // Collision check
+        if (
+            dust.x < binX + binWidth &&
+            dust.x + dustSize > binX &&
+            dust.y < binY + binHeight &&
+            dust.y + dustSize > binY
+        ) {
+            score++;
+            document.getElementById("score").innerText = "Score: " + score;
+            dusts.splice(i, 1);
+            continue;
+        }
+
+        // Remove if missed
+        if (dust.y > canvas.height) {
+            dusts.splice(i, 1);
+        }
+    }
+
+    requestAnimationFrame(gameLoop);
+}
+
+// -------- START GAME --------
+function startGame() {
+    score = 0;
+    dusts = [];
+    binX = canvas.width / 2 - binWidth / 2;
+
+    document.getElementById("score").innerText = "Score: 0";
+
+    level = parseInt(document.getElementById("levelSelect").value);
+    gameSpeed = parseInt(document.getElementById("speedSelect").value);
+
+    if (dustInterval) clearInterval(dustInterval);
+    dustInterval = setInterval(createDust, 800 / level);
+
+    gameRunning = true;
+    requestAnimationFrame(gameLoop);
+}
+
+// -------- BUTTON --------
+document.getElementById("startBtn").addEventListener("click", startGame);
+</script>
+
+</body>
+</html>

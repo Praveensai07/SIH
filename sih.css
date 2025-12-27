@@ -1,8 +1,3 @@
-@property --angle{
-    syntax: "<angle>";
-    inherits: true;
-    initial-value: 0deg;
-}
 
 *{
     box-sizing: border-box;
@@ -51,7 +46,8 @@ header{
     display: flex;
     align-items: center;
     align-self: center;
-    font-style:italic;
+    /* font-style:italic; */
+    font-family: "poppins", sans-serif;
 }
 a{
     color: white;
@@ -67,7 +63,7 @@ a{
     margin: 0;
     width: 22%;
     font-size: 20px;
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family:"poppins", sans-serif;
 }
 .head-nav{
     width: 70%;
@@ -80,6 +76,7 @@ a{
     height: 27px;
     border-radius: 7px;
     border: none;
+    outline: none;
     box-shadow: 4px 4spx 5px rgba(0, 0, 0, 0.575);
 }
 .head-inp::placeholder{
@@ -133,7 +130,7 @@ a{
     margin: 0;
     display: flex;
     align-items: center;
-    background-color:#0000007c;
+    background-color:#0000008a;
     backdrop-filter: blur(2px);
     color: #ffffff;
     width: 100%;
@@ -163,21 +160,47 @@ a{
     color: rgb(214, 214, 214);
     cursor: pointer;
 }
-.list-link:hover{
+.list-link{
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
     color: orange;
-    transition: 0.4s ease-in;
+    font-weight: 500;
+    font-size: 22px;
+    font-family: 'poppins';
+    transition: 0.2s ease-in;
+}
+.list-link::before{
+    content: "";
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    height: 2px;
+    width: 100%;
+    transform: scaleX(0);
+    background-color: orange;
+    transition:0.3s ease;
+}
+.list-link:hover::before{
+    transform: scaleX(1.01);
 }
 .sec1-btn{
     padding: 7px;
     width: 100%;
     align-self: flex-end;
-    border: 2px solid orange;
-    background-color: #00000000;
-    cursor: pointer;
     border-radius: 5px;
+    border: 2px solid rgb(255, 166, 0);
+    background-image: linear-gradient(45deg, rgb(235, 86, 49), rgb(255, 166, 0));
+    background-size: 0% 100%;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(0, 0, 0, 0);
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-size 0.4s ease, transform 0.3s ease, box-shadow 0.3s ease;
     font-weight: 600;
     font-size: 18px;
-    color: rgb(236, 236, 236);
+    color: rgb(255, 255, 255);
 }
 
 .nav-btn{
@@ -186,9 +209,10 @@ a{
    
 }
 .sec1-btn:hover{
-    background-color: orange;
-    color:white;
-    transition: 0.4s ease-in-out;
+    background-size: 100% 100%;
+    background-position: left;
+    transform: scale(1.07);
+    color: white;
 }
 
 .sector1 {
@@ -287,6 +311,7 @@ a{
             border:2px solid grey;
             border-radius: 5px;
             transition: 0.3s ease-in-out;
+            cursor: pointer;
             animation: pop-up-box 1s ease 0s 1 normal;
         }
         .div2 .flex-box :nth-child(1){
@@ -458,8 +483,10 @@ p{
     height: 350px;
     text-align: center;
     font-family: "Poppins", serif;
+    color: #000;
+    background-image: url("images/beach.jpg");
+    
     padding: 0 100px;
-    background-image: url('images/beach.jpg');
     filter: brightness(80%);
     background-repeat: no-repeat;
     background-size:cover ;
@@ -474,9 +501,9 @@ p{
     animation-timeline: view(); 
 }
 .ARVR-text{
+    color: #ffffff;
     position: absolute;
     top: 0;
-    
     text-align: center;
     margin: 0 5%;
     
@@ -485,14 +512,15 @@ p{
     color: white;
 }
 .join-btn{
-    margin: 10px;
+    margin-top: 10px;
     width: 100px;
+    
     border: 2px solid white;
-    font-family: poppins;
+    font-family: "poppins";
     font-weight: 500;
-    color: white;
+    color: rgb(255, 255, 255);
     background-color: transparent;
-    transition: 0.3s ease;
+    transition: all 0.2s ease;
     animation: pop-up  ease-in;
     animation-range: entry 0 cover 10%;
     animation-timeline: view(); 
@@ -519,6 +547,8 @@ p{
     border: 2px solid black;
     padding: 7px;
     border-radius: 5px;
+    overflow: hidden;
+
 }
 .achievements-text
 {
@@ -532,12 +562,10 @@ p{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    cursor: pointer;
+    
     transition: 0.3s ease-in;
 }
-.achievements-text:hover{
-    transform: scale(1.07);
-}
+
 .foot-flex{
     justify-content: space-evenly;
 }
@@ -606,16 +634,17 @@ p{
 }
 #facebook:hover{
     color:blue;
-      transition: 0.2s ease-in-out;
+    transition: 0.2s ease-in-out;
     transform: scale(1.2);
 }
 #linkedin:hover{
     color: blue;
-      transition: 0.2s ease-in-out;
+    transition: 0.2s ease-in-out;
     transform: scale(1.2);
 }
 .footer-img{
-    background-image: url('images/footer.jpg');
+    background-image: url("images/footer.jpg");
+    background-repeat: no-repeat;
     background-position: bottom;
     height: 400px;
     background-size: cover;
@@ -637,6 +666,7 @@ p{
 }
 .foot-box{
     color: white;
+    font-weight: 400;
     height: max-content;
     width: max-content;
     /* box-shadow: 0px 0px 3px grey; */
@@ -650,6 +680,7 @@ p{
 .foot-caption,.foot-caption-two{
     color: grey;
     font-family: 'poppins';
+    cursor: pointer;
 }
 
 .foot-caption-two::before{
@@ -674,93 +705,93 @@ p{
     padding: 15px;
 
 }
-.carousel{
-            
-            position: relative;
-            display: flex;
-            width: 400px;
-            justify-content: center;
-            justify-self: center;
-            height: 18rem;
-            overflow: hidden;
-        }
-         .fam-slider {
-            padding: 0;
-            display: flex;
-            width: 400%; /* 4 images → 100% each */
-            height: 100%;
-            transition: transform 1s ease-in-out;
-        }
+    .carousel{
+    position: relative;
+    display: flex;
+    width: 400px;
+    justify-content: center;
+    justify-self: center;
+    height: 18rem;
+    overflow: hidden;
+    box-shadow: 0px 0px 10px rgb(0, 0, 0);
+}
+    .fam-slider {
+    padding: 0;
+    display: flex;
+    width: 400%; /* 4 images → 100% each */
+    height: 100%;
+    transition: transform 1s ease-in-out;
+}
 
-        .fam-slide {
-            flex: 0 0 100%; /* each slide takes full width */
-            height: 100%;
-            z-index: -1;
-            display: flex;
-            justify-content: flex-end;
-            position: relative;
-            cursor: pointer;
-        }
-        
-        .fam-slide .favtext {
-            
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(255, 255, 255);
-            line-height: 18px;
-            color: #000000;
-            height: 0;
-            transition: height 0.4s ease;
-        }
-        .fam-slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            cursor: pointer;
-            transition: 0.4s ease;
-        }
-        
-        .carousel:hover .fam-slider:hover .fam-slide:hover .favtext{
-            height: 40%;
-            
-        }
-        .carousel:hover .fam-slider:hover .fam-slide:hover img{
-            height: 70%;
-            filter: brightness(35%);
+.fam-slide {
+    flex: 0 0 100%; /* each slide takes full width */
+    height: 100%;
+    z-index: -1;
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    cursor: pointer;
+}
 
-        }
-        .fam-slide .slide-title{
-            height: 100%;
-            width: 100%;
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            background: transparent;
-            text-align: center;
-            color: #fff;
-            text-decoration: rgb(255, 0, 0) underline;
-            text-shadow: 0 0 20px black;
-            
-        }
-       
-        .favtext .favtext-title{
-            font-size: 18px;
-            margin: 5px;
-            font-weight: 500;
-        }
-        .favtext-p{
-            position: absolute;
-            top: 0;
-            width: 80%;
-            color: #7c0a0a;
-            font-size: 15px;
-        }
-        #translate{
-            border: none;
-            background: transparent;
-        }
+.fam-slide .favtext {
+    
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(255, 255, 255);
+    line-height: 18px;
+    color: #000000;
+    height: 0;
+    transition: height 0.4s ease;
+}
+.fam-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    cursor: pointer;
+    transition: 0.4s ease;
+}
+
+.carousel:hover .fam-slider:hover .fam-slide:hover .favtext{
+    height: 40%;
+    
+}
+.carousel:hover .fam-slider:hover .fam-slide:hover img{
+    height: 70%;
+    filter: brightness(35%);
+
+}
+.fam-slide .slide-title{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: transparent;
+    text-align: center;
+    color: #fff;
+    text-decoration: rgb(255, 0, 0) underline;
+    text-shadow: 0 0 20px black;
+    
+}
+
+.favtext .favtext-title{
+    font-size: 18px;
+    margin: 5px;
+    font-weight: 500;
+}
+.favtext-p{
+    position: absolute;
+    top: 0;
+    width: 80%;
+    color: #7c0a0a;
+    font-size: 15px;
+}
+#translate{
+    border: none;
+    background: transparent;
+}
 
 @keyframes animate{
     to{
@@ -808,7 +839,7 @@ p{
      from{
         transform: scale(0.1);
         opacity: 0.3;
-        transform: translateX(-100px);
+        transform: translateX(-110px);
     }
     to{
         transform: scale(1);

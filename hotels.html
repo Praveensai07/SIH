@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Hotels in Jharkhand - Premium Accommodations</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            color: #1a1a1a;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #0a2540;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #5a6d7f;
+            font-weight: 400;
+        }
+
+        .search-section {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            margin-bottom: 40px;
+        }
+
+        .search-section h2 {
+            font-size: 1.3rem;
+            color: #0a2540;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .date-picker-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .date-input-group {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .date-input-group label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #5a6d7f;
+            margin-bottom: 8px;
+        }
+
+        .date-input-group input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e1e8ed;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.2s;
+        }
+
+        .date-input-group input:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .search-btn {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 12px 32px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 28px;
+        }
+
+        .search-btn:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        }
+
+        .hotels-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .hotel-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .hotel-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        }
+
+        .hotel-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        /* Zoom image on card hover */
+        .hotel-card:hover .hotel-image {
+            transform: scale(1.08);
+        }
+
+        .hotel-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+        .hotel-image img:hover {
+            transform: scale(1.05);
+            transition: transform 0.3s;
+        }
+        .hotel-content {
+            padding: 24px;
+        }
+
+        .hotel-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #0a2540;
+            margin-bottom: 8px;
+        }
+
+        .hotel-location {
+            font-size: 0.95rem;
+            color: #5a6d7f;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .hotel-location::before {
+            content: "📍";
+            font-size: 1rem;
+        }
+
+        .hotel-amenities {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+
+        .amenity-tag {
+            background: #e8f0fe;
+            color: #2563eb;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .hotel-price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #16a34a;
+            margin-bottom: 8px;
+        }
+
+        .price-subtitle {
+            font-size: 0.85rem;
+            color: #5a6d7f;
+            margin-bottom: 16px;
+        }
+
+        .availability-status {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .available {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .limited {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .book-btn {
+            width: 100%;
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .book-btn:hover {
+            background: #1d4ed8;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 0;
+            border-radius: 16px;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            animation: slideUp 0.3s;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-header {
+            padding: 24px 30px;
+            border-bottom: 1px solid #e1e8ed;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h2 {
+            font-size: 1.5rem;
+            color: #0a2540;
+            font-weight: 700;
+        }
+
+        .close {
+            color: #5a6d7f;
+            font-size: 32px;
+            font-weight: 300;
+            cursor: pointer;
+            transition: color 0.2s;
+            line-height: 1;
+        }
+
+        .close:hover {
+            color: #0a2540;
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .modal-detail {
+            margin-bottom: 20px;
+        }
+
+        .modal-detail h3 {
+            font-size: 1.1rem;
+            color: #0a2540;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .modal-detail p {
+            color: #5a6d7f;
+            line-height: 1.8;
+        }
+
+        .features-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .features-list li {
+            padding: 8px 0;
+            color: #5a6d7f;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .features-list li::before {
+            content: "✓";
+            color: #16a34a;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .hotels-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .date-picker-container {
+                flex-direction: column;
+            }
+
+            .modal-content {
+                margin: 10% auto;
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Discover Premium Hotels in Jharkhand</h1>
+            <p class="subtitle">Experience luxury and comfort at Jharkhand's finest accommodations</p>
+        </header>
+
+        <section class="search-section">
+            <h2>Find Your Perfect Stay</h2>
+            <div class="date-picker-container">
+                <div class="date-input-group">
+                    <label for="checkin">Check-in Date</label>
+                    <input type="date" id="checkin" name="checkin">
+                </div>
+                <div class="date-input-group">
+                    <label for="checkout">Check-out Date</label>
+                    <input type="date" id="checkout" name="checkout">
+                </div>
+                <button class="search-btn" onclick="checkAvailability()">Check Availability</button>
+            </div>
+        </section>
+
+        <div class="hotels-grid" id="hotelsGrid">
+            <!-- Hotels will be rendered here by JavaScript -->
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="hotelModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Hotel Details</h2>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Modal content will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Hotel data
+        const hotels = [
+            {
+                id: 1,
+                name: "Radisson Blu Hotel",
+                location: "Ranchi, Jharkhand",
+                price: 5999,
+                rating: 4.5,
+                amenities: ["WiFi", "Pool", "Restaurant", "Gym"],
+                description: "Experience luxury at its finest at Radisson Blu Hotel, Ranchi. Located in the heart of the city, this premium hotel offers world-class amenities and exceptional service.",
+                features: [
+                    "24/7 Room Service",
+                    "Business Center",
+                    "Spa & Wellness",
+                    "Airport Shuttle",
+                    "Complimentary Breakfast",
+                    "Meeting Rooms"
+                ],
+                image: "images/radisonblu.png"
+            },
+            {
+                id: 2,
+                name: "The Sonnet",
+                location: "Jamshedpur, Jharkhand",
+                price: 4499,
+                rating: 4.3,
+                amenities: ["WiFi", "Restaurant", "Bar", "Parking"],
+                description: "The Sonnet offers a blend of comfort and elegance in Jamshedpur. Perfect for both business and leisure travelers with modern amenities and warm hospitality.",
+                features: [
+                    "Free WiFi",
+                    "In-room Dining",
+                    "Concierge Service",
+                    "Laundry Service",
+                    "Travel Desk",
+                    "Conference Facilities"
+                ],
+                image: "images/sonnet.png"
+            },
+            {
+                id: 3,
+                name: "Vivanta Jamshedpur",
+                location: "Goulmuri, Jamshedpur",
+                price: 6499,
+                rating: 4.6,
+                amenities: ["WiFi", "Pool", "Spa", "Restaurant"],
+                description: "Vivanta by Taj in Goulmuri offers an unparalleled luxury experience. Nestled in nature, this resort-style property combines elegance with natural beauty.",
+                features: [
+                    "Outdoor Pool",
+                    "Jiva Spa",
+                    "Multiple Dining Options",
+                    "Fitness Center",
+                    "Garden Views",
+                    "Kids Play Area"
+                ],
+                image: "images/vivanta.png"
+            },
+            {
+                id: 4,
+                name: "Capitol Hill",
+                location: "Ranchi, Jharkhand",
+                price: 3999,
+                rating: 4.2,
+                amenities: ["WiFi", "Restaurant", "Gym", "Parking"],
+                description: "Capitol Hill provides comfortable accommodation with excellent facilities in the capital city of Jharkhand. Known for its warm hospitality and strategic location.",
+                features: [
+                    "Complimentary Breakfast",
+                    "Conference Rooms",
+                    "Banquet Hall",
+                    "Travel Assistance",
+                    "Car Rental",
+                    "24-hour Front Desk"
+                ],
+                image: "images/capitol.png"
+            }
+        ];
+
+        let selectedHotel = null;
+
+        // Set minimum date to today
+        document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('checkin').setAttribute('min', today);
+            document.getElementById('checkout').setAttribute('min', today);
+            
+            renderHotels();
+        });
+
+        // Update checkout min date when checkin changes
+        document.getElementById('checkin').addEventListener('change', function() {
+            const checkinDate = this.value;
+            document.getElementById('checkout').setAttribute('min', checkinDate);
+        });
+
+        function renderHotels() {
+            const grid = document.getElementById('hotelsGrid');
+            grid.innerHTML = '';
+
+            hotels.forEach(hotel => {
+                const availability = Math.random() > 0.5 ? 'available' : 'limited';
+                const availabilityText = availability === 'available' ? 'Available' : 'Only 2 rooms left';
+
+                const card = `
+                <div class="hotel-card" onclick="openModal(${hotel.id})">
+                    <img src="${hotel.image}" alt="${hotel.name}" class="hotel-image">
+                    <div class="hotel-content">
+                        <h3 class="hotel-name">${hotel.name}</h3>
+                        <div class="hotel-location">${hotel.location}</div>
+                        <div class="hotel-amenities">
+                            ${hotel.amenities.map(a => `<span class="amenity-tag">${a}</span>`).join('')}
+                        </div>
+                        <div class="hotel-price">₹${hotel.price.toLocaleString()}</div>
+                        <div class="price-subtitle">per night + taxes</div>
+                        <div class="availability-status ${availability}">${availabilityText}</div>
+                        <button class="book-btn" onclick="event.stopPropagation(); bookHotel(${hotel.id})">
+                            Book Now
+                        </button>
+                    </div>
+                </div>
+            `;
+                grid.innerHTML += card;
+            });
+        }
+
+        function openModal(hotelId) {
+            const hotel = hotels.find(h => h.id === hotelId);
+            if (!hotel) return;
+
+            selectedHotel = hotel;
+
+            document.getElementById('modalTitle').textContent = hotel.name;
+            document.getElementById('modalBody').innerHTML = `
+                <div class="modal-detail">
+                    <h3>Location</h3>
+                    <p>${hotel.location}</p>
+                </div>
+                <div class="modal-detail">
+                    <h3>About</h3>
+                    <p>${hotel.description}</p>
+                </div>
+                <div class="modal-detail">
+                    <h3>Amenities & Features</h3>
+                    <ul class="features-list">
+                        ${hotel.features.map(feature => `<li>${feature}</li>`).join('')}
+                    </ul>
+                </div>
+                <div class="modal-detail">
+                    <h3>Price</h3>
+                    <p style="font-size: 1.5rem; font-weight: 700; color: #16a34a;">₹${hotel.price.toLocaleString()} <span style="font-size: 1rem; color: #5a6d7f; font-weight: 400;">per night</span></p>
+                </div>
+                <button class="book-btn" onclick="bookHotel(${hotel.id})">Book Now</button>
+            `;
+
+            document.getElementById('hotelModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('hotelModal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('hotelModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        function checkAvailability() {
+            const checkin = document.getElementById('checkin').value;
+            const checkout = document.getElementById('checkout').value;
+
+            if (!checkin || !checkout) {
+                alert('Please select both check-in and check-out dates');
+                return;
+            }
+
+            const checkinDate = new Date(checkin);
+            const checkoutDate = new Date(checkout);
+
+            if (checkoutDate <= checkinDate) {
+                alert('Check-out date must be after check-in date');
+                return;
+            }
+
+            // Simulate availability check
+            alert(`Checking availability from ${checkin} to ${checkout}...\n\nAll hotels are available for your selected dates!`);
+            renderHotels();
+        }
+
+        function bookHotel(hotelId) {
+            const hotel = hotels.find(h => h.id === hotelId);
+            const checkin = document.getElementById('checkin').value;
+            const checkout = document.getElementById('checkout').value;
+
+            if (!checkin || !checkout) {
+                alert('Please select check-in and check-out dates first');
+                return;
+            }
+
+            // Store booking data in sessionStorage
+            const bookingData = {
+                hotel: hotel,
+                checkin: checkin,
+                checkout: checkout
+            };
+            sessionStorage.setItem('bookingData', JSON.stringify(bookingData));
+
+            // Redirect to payment page
+            window.location.href = 'payment.html';
+        }
+    </script>
+</body>
+</html>

@@ -6,7 +6,7 @@
     <title>Weather API integration</title>
     <link rel="stylesheet" href="WeatherStyle.css">
 </head>
-<body>
+<body background="images/weatherbg.png">
     <div class="card">
         <form id="search">
             <input type = "text" placeholder="Enter the city name" id="myInput" spellcheck="false"> 
@@ -41,14 +41,14 @@
 
 <script>
     
-    const ApiUrl = "http://localhost:3001/weather";
+    const ApiUrl = "https://sih-aixe.onrender.com";
     const form = document.getElementById('search');
     const searchBox = document.getElementById('myInput');
     const searchBtn = document.getElementById('Submitbtn');
     const WeatherIcon = document.querySelector(".weather-icon");
     async function checkWeather(city) {
         try {
-            const response = await fetch(`${ApiUrl}?city=${encodeURIComponent(city)}`);
+                const response = await fetch(`${ApiUrl}/weather?city=${encodeURIComponent(city)}`);
             if (response.status === 404) {
                 document.querySelector(".error").style.display = "block";
                 document.querySelector(".weather").style.display = "none";
@@ -90,7 +90,7 @@
     })
 
     searchBtn.addEventListener("click",()=>{
-
+        event.preventDefault();
         checkWeather(searchBox.value);
     })
 

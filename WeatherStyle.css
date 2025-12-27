@@ -5,7 +5,10 @@
     box-sizing: border-box;
 }
 body{
-    background: #222;
+    background:url("images/weatherbg.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top;
 
 }
 .card{

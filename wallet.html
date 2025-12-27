@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jharkhand Tourism Wallet</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --forest-green: #1a5f3f;
+      --light-green: #2d8659;
+      --soft-green: #e8f5e9;
+      --golden: #d4af37;
+      --background: #f8faf9;
+      --surface: #ffffff;
+      --text: #1a1a1a;
+      --text-muted: #6b7280;
+      --border: #e5e7eb;
+      --success: #059669;
+      --warning: #f59e0b;
+      --error: #dc2626;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 480px;
+      margin: 0 auto;
+      background: var(--surface);
+      min-height: 100vh;
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, var(--forest-green) 0%, var(--light-green) 100%);
+      color: white;
+      padding: 1.5rem 1.25rem;
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .header h1 {
+      font-size: 1.125rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    .user-info {
+      font-size: 0.875rem;
+      opacity: 0.9;
+    }
+
+    /* Balance Card */
+    .balance-card {
+      background: linear-gradient(135deg, rgba(26, 95, 63, 0.95) 0%, rgba(45, 134, 89, 0.95) 100%);
+      margin: -1.5rem 1rem 1.5rem;
+      padding: 2rem 1.5rem;
+      border-radius: 1.25rem;
+      color: white;
+      box-shadow: 0 10px 30px rgba(26, 95, 63, 0.25);
+      backdrop-filter: blur(10px);
+    }
+
+    .balance-label {
+      font-size: 0.875rem;
+      opacity: 0.9;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    .balance-amount {
+      font-size: 2.75rem;
+      font-weight: 700;
+      margin-bottom: 1.25rem;
+      letter-spacing: -0.02em;
+    }
+
+    .balance-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .wallet-id {
+      font-size: 0.8125rem;
+      opacity: 0.85;
+    }
+
+    .balance-actions {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .btn-primary {
+      background: white;
+      color: var(--forest-green);
+      border: none;
+      padding: 0.625rem 1.25rem;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.15);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 0.625rem 1.25rem;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      backdrop-filter: blur(10px);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    /* Add Money Section */
+    .add-money-section {
+      background: var(--soft-green);
+      margin: 0 1rem 1.5rem;
+      padding: 1.5rem;
+      border-radius: 1rem;
+      border: 2px dashed var(--light-green);
+    }
+
+    .section-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+
+    .preset-amounts {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .preset-btn {
+      background: white;
+      border: 2px solid var(--border);
+      padding: 0.875rem;
+      border-radius: 0.625rem;
+      font-weight: 600;
+      color: var(--forest-green);
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 0.9375rem;
+    }
+
+    .preset-btn:hover {
+      border-color: var(--forest-green);
+      background: var(--forest-green);
+      color: white;
+    }
+
+    .custom-amount {
+      display: flex;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .amount-input {
+      flex: 1;
+      padding: 0.875rem 1rem;
+      border: 2px solid var(--border);
+      border-radius: 0.625rem;
+      font-size: 1rem;
+      font-weight: 500;
+    }
+
+    .amount-input:focus {
+      outline: none;
+      border-color: var(--forest-green);
+    }
+
+    .payment-methods-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+    }
+
+    .payment-method-btn {
+      background: white;
+      border: 2px solid var(--border);
+      padding: 1rem 0.5rem;
+      border-radius: 0.75rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .payment-method-btn:hover {
+      border-color: var(--forest-green);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .payment-icon {
+      font-size: 1.75rem;
+    }
+
+    .payment-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    /* Tourism Usage Section */
+    .section {
+      padding: 0 1rem 1.5rem;
+    }
+
+    .usage-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.875rem;
+    }
+
+    .usage-card {
+      background: white;
+      border: 1px solid var(--border);
+      padding: 1.25rem;
+      border-radius: 0.875rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: center;
+    }
+
+    .usage-card:hover {
+      border-color: var(--forest-green);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(26, 95, 63, 0.1);
+    }
+
+    .usage-icon {
+      font-size: 2.25rem;
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+
+    .usage-title {
+      font-weight: 600;
+      font-size: 0.875rem;
+      color: var(--text);
+      margin-bottom: 0.25rem;
+    }
+
+    .usage-subtitle {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    /* Donations Section */
+    .donations-section {
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+      margin: 0 1rem 1.5rem;
+      padding: 1.5rem;
+      border-radius: 1rem;
+      border: 1px solid #fbbf24;
+    }
+
+    .donations-grid {
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .donation-card {
+      background: white;
+      padding: 1rem;
+      border-radius: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .donation-card:hover {
+      transform: translateX(4px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .donation-icon {
+      font-size: 2rem;
+      flex-shrink: 0;
+    }
+
+    .donation-details {
+      flex: 1;
+    }
+
+    .donation-title {
+      font-weight: 600;
+      font-size: 0.9375rem;
+      margin-bottom: 0.125rem;
+    }
+
+    .donation-desc {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    /* Transaction History */
+    .transaction-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 0.75rem;
+      margin-bottom: 0.75rem;
+      transition: all 0.2s;
+    }
+
+    .transaction-item:hover {
+      border-color: var(--forest-green);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .transaction-icon-wrapper {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      flex-shrink: 0;
+    }
+
+    .success-bg { background: #dcfce7; color: #16a34a; }
+    .pending-bg { background: #fef3c7; color: #ca8a04; }
+    .failed-bg { background: #fee2e2; color: #dc2626; }
+
+    .transaction-details {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .transaction-title {
+      font-weight: 600;
+      font-size: 0.9375rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .transaction-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .status-badge {
+      padding: 0.125rem 0.5rem;
+      border-radius: 0.25rem;
+      font-size: 0.6875rem;
+      font-weight: 600;
+    }
+
+    .status-success { background: #dcfce7; color: #16a34a; }
+    .status-pending { background: #fef3c7; color: #ca8a04; }
+    .status-failed { background: #fee2e2; color: #dc2626; }
+
+    .transaction-amount {
+      font-weight: 700;
+      font-size: 1rem;
+      white-space: nowrap;
+    }
+
+    .amount-credit { color: var(--success); }
+    .amount-debit { color: var(--text); }
+
+    /* Offers Section */
+    .offers-section {
+      background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%);
+      margin: 0 1rem 1.5rem;
+      padding: 1.5rem;
+      border-radius: 1rem;
+      border: 1px solid #f9a8d4;
+    }
+
+    .offers-scroll {
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+      padding-bottom: 0.5rem;
+      scrollbar-width: thin;
+    }
+
+    .offer-card {
+      background: white;
+      padding: 1.25rem;
+      border-radius: 0.875rem;
+      min-width: 240px;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: 2px solid transparent;
+    }
+
+    .offer-card:hover {
+      border-color: #ec4899;
+      transform: scale(1.02);
+    }
+
+    .offer-badge {
+      background: linear-gradient(135deg, #ec4899 0%, #f472b6 100%);
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 1rem;
+      font-size: 0.6875rem;
+      font-weight: 700;
+      display: inline-block;
+      margin-bottom: 0.75rem;
+      text-transform: uppercase;
+    }
+
+    .offer-title {
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 0.375rem;
+      color: var(--text);
+    }
+
+    .offer-desc {
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* Refunds Section */
+    .refunds-section {
+      background: #eff6ff;
+      margin: 0 1rem 1.5rem;
+      padding: 1.5rem;
+      border-radius: 1rem;
+      border: 1px solid #bfdbfe;
+    }
+
+    .refund-info {
+      display: flex;
+      gap: 1rem;
+      align-items: start;
+      margin-top: 1rem;
+    }
+
+    .refund-icon {
+      font-size: 2rem;
+      flex-shrink: 0;
+    }
+
+    .refund-content h3 {
+      font-weight: 600;
+      font-size: 0.9375rem;
+      margin-bottom: 0.375rem;
+    }
+
+    .refund-content p {
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 0.5rem;
+    }
+
+    .refund-time {
+      font-size: 0.75rem;
+      color: #2563eb;
+      font-weight: 600;
+    }
+
+    /* Security Section */
+    .security-section {
+      background: #f0fdf4;
+      margin: 0 1rem 1.5rem;
+      padding: 1.5rem;
+      border-radius: 1rem;
+      border: 1px solid #bbf7d0;
+    }
+
+    .security-features {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .security-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .security-icon {
+      width: 40px;
+      height: 40px;
+      background: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      flex-shrink: 0;
+    }
+
+    .security-text {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    /* Help Section */
+    .help-section {
+      background: #fef2f2;
+      margin: 0 1rem 1.5rem;
+      padding: 1.5rem;
+      border-radius: 1rem;
+      border: 1px solid #fecaca;
+    }
+
+    .help-buttons {
+      display: grid;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .help-btn {
+      background: white;
+      border: 1px solid var(--border);
+      padding: 1rem;
+      border-radius: 0.75rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      text-align: left;
+    }
+
+    .help-btn:hover {
+      border-color: #dc2626;
+      transform: translateX(4px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .help-icon {
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .help-text {
+      flex: 1;
+    }
+
+    .help-title {
+      font-weight: 600;
+      font-size: 0.9375rem;
+      margin-bottom: 0.125rem;
+    }
+
+    .help-desc {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .see-all {
+      color: var(--forest-green);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.875rem;
+    }
+
+    .see-all:hover {
+      text-decoration: underline;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    @media (max-width: 480px) {
+      .balance-amount {
+        font-size: 2.25rem;
+      }
+
+      .balance-actions {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .btn-primary, .btn-secondary {
+        width: 100%;
+      }
+
+      .usage-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <div class="header-top">
+        <h1>Jharkhand Tourism Wallet</h1>
+      </div>
+      <div class="user-info">Welcome, Rajesh Kumar</div>
+    </div>
+
+    <!-- Balance Card -->
+    <div class="balance-card">
+      <div class="balance-label">Available Balance</div>
+      <div class="balance-amount">₹300.00</div>
+      <div class="balance-footer">
+        <span class="wallet-id">Wallet ID: JH-TW-5847</span>
+        <div class="balance-actions">
+          <button class="btn-primary">Add Money</button>
+          <button class="btn-secondary">Withdraw</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add Money Section -->
+    <div class="add-money-section">
+      <div class="section-title">Quick Add Money</div>
+      <div class="preset-amounts">
+        <button class="preset-btn">₹500</button>
+        <button class="preset-btn">₹1000</button>
+        <button class="preset-btn">₹2000</button>
+      </div>
+      <div class="custom-amount">
+        <input type="number" class="amount-input" placeholder="Enter custom amount">
+        <button class="btn-primary" style="padding: 0.875rem 1.5rem;">Add</button>
+      </div>
+      <div class="section-title" style="margin-top: 1rem;">Payment Method</div>
+      <div class="payment-methods-grid">
+        <button class="payment-method-btn">
+          <span class="payment-icon">💳</span>
+          <span class="payment-label">UPI</span>
+        </button>
+        <button class="payment-method-btn">
+          <span class="payment-icon">🏦</span>
+          <span class="payment-label">Bank</span>
+        </button>
+        <button class="payment-method-btn">
+          <span class="payment-icon">💳</span>
+          <span class="payment-label">Card</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Tourism Usage Section -->
+    <div class="section">
+      <div class="section-title">Use Your Wallet For</div>
+      <div class="usage-grid">
+        <div class="usage-card">
+          <span class="usage-icon">🏨</span>
+          <div class="usage-title">Hotels & Resorts</div>
+          <div class="usage-subtitle">Book stays easily</div>
+        </div>
+        <div class="usage-card">
+          <span class="usage-icon">🚗</span>
+          <div class="usage-title">Travel & Transport</div>
+          <div class="usage-subtitle">Cabs & rentals</div>
+        </div>
+        <div class="usage-card">
+          <span class="usage-icon">🎫</span>
+          <div class="usage-title">Entry Tickets</div>
+          <div class="usage-subtitle">Parks & waterfalls</div>
+        </div>
+        <div class="usage-card">
+          <span class="usage-icon">🎭</span>
+          <div class="usage-title">Cultural Events</div>
+          <div class="usage-subtitle">Festivals & shows</div>
+        </div>
+        <div class="usage-card">
+          <span class="usage-icon">🍽️</span>
+          <div class="usage-title">Local Food</div>
+          <div class="usage-subtitle">Authentic cuisine</div>
+        </div>
+        <div class="usage-card">
+          <span class="usage-icon">🏞️</span>
+          <div class="usage-title">Experiences</div>
+          <div class="usage-subtitle">Adventure tours</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Donations Section -->
+    <div class="donations-section">
+      <div class="section-title">Support Jharkhand</div>
+      <div class="donations-grid">
+        <div class="donation-card">
+          <span class="donation-icon">🤝</span>
+          <div class="donation-details">
+            <div class="donation-title">Tribal Welfare</div>
+            <div class="donation-desc">Support local communities</div>
+          </div>
+        </div>
+        <div class="donation-card">
+          <span class="donation-icon">🌿</span>
+          <div class="donation-details">
+            <div class="donation-title">Eco-Tourism</div>
+            <div class="donation-desc">Sustainable tourism initiatives</div>
+          </div>
+        </div>
+        <div class="donation-card">
+          <span class="donation-icon">🌳</span>
+          <div class="donation-details">
+            <div class="donation-title">Forest Conservation</div>
+            <div class="donation-desc">Protect our green heritage</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Transaction History -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-title">Recent Transactions</div>
+        <a href="#" class="see-all">View All</a>
+      </div>
+
+      <div class="transaction-item">
+        <div class="transaction-icon-wrapper success-bg">✓</div>
+        <div class="transaction-details">
+          <div class="transaction-title">Hotel Booking - Netarhat</div>
+          <div class="transaction-meta">
+            <span>Today, 2:30 PM</span>
+            <span class="status-badge status-success">Success</span>
+          </div>
+        </div>
+        <div class="transaction-amount amount-debit">-₹2,850</div>
+      </div>
+
+      <div class="transaction-item">
+        <div class="transaction-icon-wrapper success-bg">↑</div>
+        <div class="transaction-details">
+          <div class="transaction-title">Wallet Top-up</div>
+          <div class="transaction-meta">
+            <span>Yesterday, 10:15 AM</span>
+            <span class="status-badge status-success">Success</span>
+          </div>
+        </div>
+        <div class="transaction-amount amount-credit">+₹5,000</div>
+      </div>
+
+      <div class="transaction-item">
+        <div class="transaction-icon-wrapper success-bg">💚</div>
+        <div class="transaction-details">
+          <div class="transaction-title">Donation to Eco-tourism</div>
+          <div class="transaction-meta">
+            <span>Dec 24, 4:20 PM</span>
+            <span class="status-badge status-success">Success</span>
+          </div>
+        </div>
+        <div class="transaction-amount amount-debit">-₹500</div>
+      </div>
+
+      <div class="transaction-item">
+        <div class="transaction-icon-wrapper pending-bg">⏱</div>
+        <div class="transaction-details">
+          <div class="transaction-title">Betla National Park Entry</div>
+          <div class="transaction-meta">
+            <span>Dec 23, 9:30 AM</span>
+            <span class="status-badge status-pending">Pending</span>
+          </div>
+        </div>
+        <div class="transaction-amount amount-debit">-₹300</div>
+      </div>
+    </div>
+
+    <!-- Offers & Cashback Section -->
+    <div class="offers-section">
+      <div class="section-title">Exclusive Offers & Rewards</div>
+      <div class="offers-scroll">
+        <div class="offer-card">
+          <span class="offer-badge">Cashback</span>
+          <div class="offer-title">10% Cashback</div>
+          <div class="offer-desc">Get up to ₹500 cashback on hotel bookings above ₹3000</div>
+        </div>
+        <div class="offer-card">
+          <span class="offer-badge">Festival Offer</span>
+          <div class="offer-title">Sarhul Special</div>
+          <div class="offer-desc">Flat 20% off on cultural event bookings during Sarhul festival</div>
+        </div>
+        <div class="offer-card">
+          <span class="offer-badge">Student Discount</span>
+          <div class="offer-title">Student Pass</div>
+          <div class="offer-desc">25% discount on all entry tickets with valid student ID</div>
+        </div>
+        <div class="offer-card">
+          <span class="offer-badge">Group Deal</span>
+          <div class="offer-title">Group Travel Saver</div>
+          <div class="offer-desc">Save 30% when booking for groups of 5 or more travelers</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Refunds Section -->
+    <div class="refunds-section">
+      <div class="section-title">Refunds & Cancellations</div>
+      <div class="refund-info">
+        <span class="refund-icon">🔄</span>
+        <div class="refund-content">
+          <h3>Auto-Refund on Cancellation</h3>
+          <p>All cancelled bookings are automatically refunded to your wallet. You can track your refund status in transaction history.</p>
+          <span class="refund-time">⏱ Refunds processed within 2-3 working days</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Security Section -->
+    <div class="security-section">
+      <div class="section-title">Your Wallet is Secure</div>
+      <div class="security-features">
+        <div class="security-item">
+          <span class="security-icon">🔐</span>
+          <span class="security-text">OTP Verification</span>
+        </div>
+        <div class="security-item">
+          <span class="security-icon">🔢</span>
+          <span class="security-text">Wallet PIN</span>
+        </div>
+        <div class="security-item">
+          <span class="security-icon">📱</span>
+          <span class="security-text">Device Auth</span>
+        </div>
+        <div class="security-item">
+          <span class="security-icon">✅</span>
+          <span class="security-text">Secure Transactions</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Help & Support Section -->
+    <div class="help-section">
+      <div class="section-title">Help & Support</div>
+      <div class="help-buttons">
+        <button class="help-btn">
+          <span class="help-icon">❓</span>
+          <div class="help-text">
+            <div class="help-title">FAQs</div>
+            <div class="help-desc">Common questions answered</div>
+          </div>
+        </button>
+        <button class="help-btn">
+          <span class="help-icon">⚠️</span>
+          <div class="help-text">
+            <div class="help-title">Report Failed Transaction</div>
+            <div class="help-desc">Get instant assistance</div>
+          </div>
+        </button>
+        <button class="help-btn">
+          <span class="help-icon">💬</span>
+          <div class="help-text">
+            <div class="help-title">Customer Support</div>
+            <div class="help-desc">📧 support@jhtourism.com | 📞 1800-123-4567</div>
+          </div>
+        </button>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

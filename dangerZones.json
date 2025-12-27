@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "name": "Saranda Forest",
+    "type": "Wildlife",
+    "level": "High",
+    "message": "Elephant corridor & dense forest area. Entry risky after sunset.",
+    "lat": 22.285,
+    "lng": 85.432,
+    "radius": 3500
+  },
+  {
+    "id": 2,
+    "name": "Jharia Coalfields",
+    "type": "Mining",
+    "level": "Critical",
+    "message": "Underground fires & active mining blasts.",
+    "lat": 23.740,
+    "lng": 86.410,
+    "radius": 3000
+  },
+  {
+    "id": 3,
+    "name": "Palamu Tiger Reserve Buffer",
+    "type": "Wildlife",
+    "level": "High",
+    "message": "Protected tiger habitat buffer zone. Restricted movement.",
+    "lat": 23.870,
+    "lng": 84.180,
+    "radius": 4000
+  },
+  {
+    "id": 4,
+    "name": "Noamundi Iron Ore Mining Area",
+    "type": "Mining",
+    "level": "High",
+    "message": "Heavy mining vehicles and blasting operations ongoing.",
+    "lat": 22.150,
+    "lng": 85.520,
+    "radius": 2800
+  },
+  {
+    "id": 5,
+    "name": "Latehar Forest Region",
+    "type": "Restricted",
+    "level": "Medium",
+    "message": "Remote forest zone with limited connectivity and safety risks.",
+    "lat": 23.750,
+    "lng": 84.500,
+    "radius": 3800
+  },
+  {
+    "id":6,
+    "name":"RGUKT NUZVID",
+    "type":"JAIL",
+    "level":"HIGH",
+    "message":"HIGH SECURITY JAIL AREA AVOID UNAUTHORIZED ENTRY",
+    "lat":16.7931,
+    "lng":80.8219,
+    "radius":3500
+  }
+]
