@@ -2,6 +2,17 @@
 import express from "express";
 import cors from "cors";
 import fetch from "node-fetch";
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const dangerZones = JSON.parse(
+  fs.readFileSync(path.join(__dirname, "dangerZones.json"), "utf-8")
+);
+
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -20,7 +31,7 @@ const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const CHAT_ID = process.env.CHAT_ID;
 
 /* ================= STATIC DATA ================= */
-import dangerZones from "./dangerZones.json" assert { type: "json" };
+
 
 /* ================= HEALTH CHECK ================= */
 app.get("/", (req, res) => {
