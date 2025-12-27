@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<<<<<<< HEAD
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Prakruthi AI</title>
@@ -53,6 +54,24 @@
 </div>
 <script>
  let voiceMsg = "";
+=======
+  <meta charset="UTF-8">
+  <title>OpenAI Chat Prototype</title>
+  <link rel="stylesheet" href="chat.css">
+</head>
+<body>
+  <div class="Heading">Chat with Prakruthi</div>
+  <div id="translate"></div>
+  <span><input type="checkbox" id="theme"></span>
+  <div class="chat-box"></div>
+  <div class="search">
+    <input type="text" id="msg" placeholder="Enter a Message..." spellcheck="false">
+    <button id="sendBtn"><img src="images/search.png" alt="search"></button>
+  </div>
+  <button id="btnToSt">Speak</button>
+  <script>
+    let voiceMsg = "";
+>>>>>>> 2fd2fc292cb54b5ddfcb8ddd0b597a6ee3e52999
     const msgInput = document.getElementById("msg");
     const chatBox = document.querySelector(".chat-box");
     const sendBtn = document.getElementById("sendBtn");

@@ -40,21 +40,27 @@
 </body>
 
 <script>
+<<<<<<< HEAD
     
+=======
+>>>>>>> 2fd2fc292cb54b5ddfcb8ddd0b597a6ee3e52999
     const ApiUrl = "https://sih-aixe.onrender.com";
     const form = document.getElementById('search');
     const searchBox = document.getElementById('myInput');
-    const searchBtn = document.getElementById('Submitbtn');
     const WeatherIcon = document.querySelector(".weather-icon");
+
     async function checkWeather(city) {
         try {
+<<<<<<< HEAD
                 const response = await fetch(`${ApiUrl}/weather?city=${encodeURIComponent(city)}`);
+=======
+            const response = await fetch(`${ApiUrl}/weather?city=${encodeURIComponent(city)}`);
+>>>>>>> 2fd2fc292cb54b5ddfcb8ddd0b597a6ee3e52999
             if (response.status === 404) {
                 document.querySelector(".error").style.display = "block";
                 document.querySelector(".weather").style.display = "none";
             } else {
                 const data = await response.json();
-                console.log(data);
                 if (data.weather && data.weather[0]) {
                     if (data.weather[0].main === 'Clouds') {
                         WeatherIcon.src = "images/clouds.png";
@@ -80,6 +86,7 @@
             document.querySelector(".weather").style.display = "none";
         }
     }
+<<<<<<< HEAD
     searchBox.addEventListener("keydown",
     function(event){
         if(event.key==="Enter"){
@@ -90,11 +97,12 @@
     })
 
     searchBtn.addEventListener("click",()=>{
+=======
+
+    form.addEventListener("submit", function(event) {
+>>>>>>> 2fd2fc292cb54b5ddfcb8ddd0b597a6ee3e52999
         event.preventDefault();
         checkWeather(searchBox.value);
-    })
-
-
+    });
 </script>
-
 </html>

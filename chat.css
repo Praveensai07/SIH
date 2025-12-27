@@ -7,7 +7,11 @@ body {
   margin: 0;
   background: #f7f7f8;
   display: flex;
+<<<<<<< HEAD
   justify-content: center; 
+=======
+  justify-content: center;
+>>>>>>> 2fd2fc292cb54b5ddfcb8ddd0b597a6ee3e52999
   align-items: center;
   height: 100vh;
   color: #0f172a;
@@ -80,7 +84,10 @@ body.dark .chat-header {
   overflow-y: auto;
   background: #000;
   border-radius: 25px;
+<<<<<<< HEAD
   color:#fff;
+=======
+>>>>>>> 2fd2fc292cb54b5ddfcb8ddd0b597a6ee3e52999
 }
 
 /* MESSAGE */
