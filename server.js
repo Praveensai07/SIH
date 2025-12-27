@@ -1,14 +1,16 @@
-require("dotenv").config();
+import dotenv from "dotenv";
+import express from "express";
+import cors from "cors";
+import fetch from "node-fetch";
 
-const express = require("express");
-const cors = require("cors");
-const fetch = require("node-fetch");
-const bodyParser = require("body-parser");
-const path = require("path");
+dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 /* ================= MIDDLEWARE ================= */
 app.use(cors());
 app.use(bodyParser.json());
