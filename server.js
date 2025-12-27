@@ -20,7 +20,7 @@ const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const CHAT_ID = process.env.CHAT_ID;
 
 /* ================= STATIC DATA ================= */
-const dangerZones = require("./dangerZones.json");
+import dangerZones from "./dangerZones.json" assert { type: "json" };
 
 /* ================= HEALTH CHECK ================= */
 app.get("/", (req, res) => {
