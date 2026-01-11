@@ -160,7 +160,7 @@ a{
     color: rgb(214, 214, 214);
     cursor: pointer;
 }
-<<<<<<< HEAD
+
 .list-link{
     position: relative;
     display: inline-block;
@@ -184,7 +184,7 @@ a{
 }
 .list-link:hover::before{
     transform: scaleX(1.01);
-=======
+
 .list-link.after{
     content:"";
     position:absolute;
